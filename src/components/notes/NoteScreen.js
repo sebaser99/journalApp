@@ -18,7 +18,7 @@ export const NoteScreen = () => {
                 </textarea>
                 <div className='notes__image'>
                     <img src='https://img.vixdata.io/pd/jpg-large/es/sites/default/files/btg/universo-observable-en-una-imagen-3.png'
-                    alt='image'
+                    alt='universe'
                     />
                     
                 </div>

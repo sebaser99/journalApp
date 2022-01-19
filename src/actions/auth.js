@@ -1,10 +1,52 @@
+import { auth } from "../firebase/firebase-config";
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import { types } from "../types/types";
+import { finishLoading, startLoading } from "./ui";
+import Swal from 'sweetalert2';
 
 export const startLoginEmailPassword = (email, password)=> {
     return(dispatch)=>{
-        setTimeout(() => {
-            dispatch(login(123, 'Pedro'))
-        }, 3500);
+        dispatch(startLoading())
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then(({user}) =>{
+                dispatch(login(user.uid, user.displayName))
+                dispatch(finishLoading())
+            })
+            .catch(error =>{
+                dispatch(finishLoading())
+                Swal.fire('Error', error.message, 'error')
+            }) 
+        
+    }
+}
+
+export const createUserWithEmailPassword = (email, password, name) =>{
+    return(dispatch)=>{
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(async({user}) =>{
+            await updateProfile(auth.currentUser, {
+                displayName: name
+            })
+             dispatch(login(user.uid, user.displayName))
+        })
+        .catch(error => {
+            Swal.fire('Error', error.message, 'error')
+        })
+    }
+}
+
+export const startGoogleLogin = ()=>{
+    const googleAuthProvider = new GoogleAuthProvider();
+    return(dispatch)=>{
+        signInWithPopup(auth, googleAuthProvider)
+        .then(({user})=>{
+           dispatch(
+            login(user.uid, user.displayName)
+           )
+  
+        })
+        .catch(err => console.log(err))
     }
 }
 
@@ -17,3 +59,17 @@ export const login = (uid, displayName) => (
         }
     }
 )
+
+export const startLogout = ()=> {
+    return(dispatch)=>{
+        auth.signOut()
+        dispatch(logout())
+    }
+}
+
+export const logout = ()=> (
+    {
+        type: types.logout
+    }
+)
+
