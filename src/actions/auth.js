@@ -3,6 +3,7 @@ import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, up
 import { types } from "../types/types";
 import { finishLoading, startLoading } from "./ui";
 import Swal from 'sweetalert2';
+import { cleaningLogout } from "./notes";
 
 export const startLoginEmailPassword = (email, password)=> {
     return(dispatch)=>{
@@ -64,6 +65,7 @@ export const startLogout = ()=> {
     return(dispatch)=>{
         auth.signOut()
         dispatch(logout())
+        dispatch(cleaningLogout())
     }
 }
 

@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import { login } from "../actions/auth";
+import { startLoadingNotes } from "../actions/notes";
 import { CheckingScreen } from "../components/checking/CheckingScreen";
 import { JournalScreen } from "../components/journal/JournalScreen";
 import { auth } from "../firebase/firebase-config";
@@ -16,11 +16,11 @@ export const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     useEffect(() => {
-        auth.onAuthStateChanged(user =>{
+        auth.onAuthStateChanged(async (user) =>{
             if(user?.uid){
                 dispatch(login(user.uid, user.displayName))
                 setIsLoggedIn(true)
-               
+                dispatch(startLoadingNotes(user.uid))
             }else {
                 setIsLoggedIn(false)    
             }

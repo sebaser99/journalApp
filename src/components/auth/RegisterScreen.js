@@ -39,7 +39,7 @@ export const RegisterScreen = () => {
         return true
     }
     return (
-        <>
+        <div className="animate__animated animate__fadeIn animate__fast">
         <h3 className="auth__title mb-5">Register</h3>
         {msgError && (
             <div className="auth__alert-error">{msgError}</div>
@@ -83,6 +83,6 @@ export const RegisterScreen = () => {
             </Link>
 
         </form>
-    </>
+    </div>
     )
 }

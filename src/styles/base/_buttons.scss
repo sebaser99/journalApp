@@ -6,6 +6,7 @@
     font-size: 14px;
     padding: 7px 10px 7px 10px;
     transition: color .3s ease;
+    margin: 20px 0px;
 
     &:focus {
         outline: none;
@@ -20,6 +21,7 @@
     background-color: $primary;
     border-radius: 2px;
     width: 100%;
+   
 
     &:disabled {
         background-color: lighten($color: $primary, $amount: 15);
@@ -28,6 +30,14 @@
         background-color: darken($color: $primary, $amount: 15);
     }
    
+}
+.btn-danger {
+    background-color: red;
+    border-radius: 3px;
+
+    &:hover {
+        background-color: darken($color: red, $amount: 10);
+    }
 }
 
 .google-btn {

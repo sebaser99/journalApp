@@ -36,7 +36,7 @@ export const LoginScreen = () => {
         return true
     }
     return (
-        <>
+        <div className="animate__animated animate__fadeIn animate__fast">
             <h3 className="auth__title mb-5">Login</h3>
             {
                 msgError && (
@@ -79,6 +79,6 @@ export const LoginScreen = () => {
                 </Link>
 
             </form>
-        </>
+        </div>
     )
 }
