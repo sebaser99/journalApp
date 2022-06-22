@@ -35,7 +35,7 @@ export const Sidebar = () => {
                 <i className='far fa-calendar-plus fa-5x'></i>
                 <p className='mt-5'>New Entry</p>
             </div>
-
+        
             <JournalEntries   />
 
         </aside>

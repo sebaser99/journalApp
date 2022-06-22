@@ -123,3 +123,8 @@ export const cleaningLogout = () => ({
     type: types.notesLogoutCleaning
 
 })
+
+export const searchingNotes = (search) => ({
+    type: types.notesSearch,
+    payload: search
+}) 
